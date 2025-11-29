@@ -1,0 +1,92 @@
+---
+title: 'P&S-2025: Lab assignment 4'
+author: "Daryna Shevchuk, Mykyta Yagoda, Teodor Talan"
+output:
+  html_document:
+    df_print: paged
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+## Work breakdown:
+
+-   Teodor Talan: Problem **1**, Problem **2**\
+-   Daryna Shevchuk: Problem **3**\
+-   Mykyta Yagoda: Problem **4**\
+
+The data for Problems 1--3 are generated as follows: set
+$$
+a_k := \{ k \ln (k^{2n} + \pi) \}, \quad k \ge 1,
+$$
+where
+$$
+\{x\} := x - \lfloor x \rfloor
+$$
+is the fractional part of a number $x$, and $n$ is your id number.
+
+Sample realizations $X_1, \dots, X_{100}$ and $Y_1, \dots, Y_{50}$ from the hypothetical normal distributions
+$N(\mu_1, \sigma_1^2)$ and $N(\mu_2, \sigma_2^2)$, respectively, are obtained as
+$$
+x_k = \Phi^{-1}(a_k), \quad k = 1, \dots, 100,
+$$
+$$
+y_l = \Phi^{-1}(a_{l+100}), \quad l = 1, \dots, 50,
+$$
+where $\Phi$ is the cumulative distribution function of $N(0,1)$, and $\Phi^{-1}$ is its inverse.
+
+\textbf{Instructions.} In Problems 1--3, test $H_0$ versus $H_1$. To this end:
+
+- point out which standard statistical test you use and justify your choice;
+- indicate the general form of the rejection region for the test of $H_0$ versus $H_1$ at the significance level $\alpha = 0.05$;
+- determine whether $H_0$ should be rejected at the significance level $0.05$;
+- indicate the $p$-value of the test and explain whether you would reject $H_0$ for this value of $p$ and why.
+
+
+### Problem 1: 
+
+$$
+H_0 : \mu_1 = \mu_2 \quad \text{vs.} \quad H_1 : \mu_1 \neq \mu_2; \quad \sigma_1^2 = \sigma_2^2 = 1.
+$$
+
+### Problem 2:
+
+$$
+H_0 : \sigma_1^2 = \sigma_2^2 \quad \text{vs.} \quad H_1 : \sigma_1^2 > \sigma_2^2; \quad \mu_1 \text{ and } \mu_2 \text{ are unknown.}
+$$
+
+### Problem 3:
+
+Using Kolmogorov--Smirnov test, check if
+
+(a) $\{x_k\}_{k=1}^{100}$ are normally distributed (with parameters calculated from the sample);
+
+(b) $\{|x_k|\}_{k=1}^{100}$ are exponentially distributed with $\lambda = 1$;
+
+(c) $\{x_k\}_{k=1}^{100}$ and $\{y_l\}_{l=1}^{50}$ have the same distributions.
+
+
+### Problem 4:
+
+In this task you’ll practice fitting the regression line to some real-life features and analyzing the results.
+The file \texttt{data.csv} contains data on students, specifically their study time and corresponding marks.
+Your tasks are as follows:
+
+(a) Create a scatter plot of Marks vs. Study Time and provide brief comments;
+
+(b) Fit a linear regression model using Marks as the dependent variable and Study Time as the independent variable.
+Explain shortly the process of deriving the regression equation;
+
+(c) Evaluate the goodness-of-fit for the fitted line;
+
+(d) Suggest a way to test whether the Study Time is significant in predicting Marks. Find the corresponding test
+statistic, specify its distribution. Find the $p$-value of the test and make a conclusion;
+
+(e) If Alice studies for approximately $8$ hours, what grade can we predict for her?
+
+(f) Suggest up to three ideas to potentially improve prediction accuracy.
+
+```{r}
+plot(cars)
+```
+
