@@ -4,8 +4,8 @@ author: "Daryna Shevchuk, Mykyta Yagoda, Teodor Talan"
 output:
   html_document:
     df_print: paged
-editor_options: 
-  markdown: 
+editor_options:
+  markdown:
     wrap: 72
 ---
 
@@ -43,7 +43,7 @@ where $\Phi$ is the cumulative distribution function of $N(0,1)$, and $\Phi^{-1}
 - indicate the $p$-value of the test and explain whether you would reject $H_0$ for this value of $p$ and why.
 
 
-### Problem 1: 
+### Problem 1:
 
 $$
 H_0 : \mu_1 = \mu_2 \quad \text{vs.} \quad H_1 : \mu_1 \neq \mu_2; \quad \sigma_1^2 = \sigma_2^2 = 1.
@@ -93,8 +93,8 @@ H_1: \{x_k\}_{k=1}^{100} \text{ do not follow } \mathcal{N}(\mu,\sigma^2).
 \]
 
 \textbf{Test and justification.}
-To test $H_0$ vs.\ $H_1$ we use the one-sample Kolmogorov--Smirnov goodness-of-fit test.  
-This is a standard nonparametric test that compares the empirical distribution function $F_n(x)$ 
+To test $H_0$ vs.\ $H_1$ we use the one-sample Kolmogorov--Smirnov goodness-of-fit test.
+This is a standard nonparametric test that compares the empirical distribution function $F_n(x)$
 of the sample with the theoretical distribution function $F(x;\hat\mu,\hat\sigma)$ of the fitted normal law.
 It is appropriate here because we want to check whether the whole distribution of the data agrees with a normal model,
 not just particular moments such as the mean or variance.
@@ -104,7 +104,7 @@ Let
 \[
 D_n = \sup_x \bigl| F_n(x) - F(x;\hat\mu,\hat\sigma) \bigr|
 \]
-be the Kolmogorov--Smirnov test statistic.  
+be the Kolmogorov--Smirnov test statistic.
 For a test of level $\alpha = 0.05$ the rejection region has the general form
 \[
 R_\alpha = \{ D_n > c_{0.05} \},
@@ -123,9 +123,9 @@ D = 0.045628, \quad p\text{-value} = 0.9853.
 Since $p\text{-value} = 0.9853 > \alpha = 0.05$, we do not reject $H_0$ at the 5\% significance level.
 
 \textbf{Conclusion in terms of the p-value.}
-Because the p-value is very large (0.9853), the observed discrepancy between the empirical distribution function 
-and the fitted normal distribution is well within what could reasonably be expected under $H_0$.  
-Therefore, we do not reject the null hypothesis, and we conclude that the sample 
+Because the p-value is very large (0.9853), the observed discrepancy between the empirical distribution function
+and the fitted normal distribution is well within what could reasonably be expected under $H_0$.
+Therefore, we do not reject the null hypothesis, and we conclude that the sample
 $\{x_k\}_{k=1}^{100}$ is consistent with a normal distribution with parameters estimated from the data.
 
 
@@ -147,13 +147,13 @@ H_1: \{|x_k|\}_{k=1}^{100} \text{ do not follow } \operatorname{Exp}(1).
 \]
 
 \textbf{Test and justification.}
-To test $H_0$ vs.\ $H_1$ we use the one-sample Kolmogorov--Smirnov goodness-of-fit test.  
-This is a standard nonparametric test that compares the empirical distribution function $F_n(x)$ 
+To test $H_0$ vs.\ $H_1$ we use the one-sample Kolmogorov--Smirnov goodness-of-fit test.
+This is a standard nonparametric test that compares the empirical distribution function $F_n(x)$
 of the sample $\{|x_k|\}$ with the theoretical distribution function $F(x)$ of the exponential law with rate $\lambda = 1$:
 \[
 F(x) = 1 - e^{-x}, \quad x \ge 0.
 \]
-The test is appropriate here because we want to check whether the entire distribution of the data agrees with the exponential model, 
+The test is appropriate here because we want to check whether the entire distribution of the data agrees with the exponential model,
 not just particular characteristics such as the mean.
 
 \textbf{General form of the rejection region.}
@@ -161,7 +161,7 @@ Let
 \[
 D_n = \sup_x \bigl| F_n(x) - F(x) \bigr|
 \]
-be the Kolmogorov--Smirnov test statistic.  
+be the Kolmogorov--Smirnov test statistic.
 For a test of level $\alpha = 0.05$ the rejection region has the general form
 \[
 R_\alpha = \{ D_n > c_{0.05} \},
@@ -176,9 +176,9 @@ D = 0.10893, \quad p\text{-value} = 0.1862.
 Since $p\text{-value} = 0.1862 > \alpha = 0.05$, we do not reject $H_0$ at the 5\% significance level.
 
 \textbf{Conclusion in terms of the p-value.}
-Because the p-value is relatively large ($0.1862$), the observed discrepancy between the empirical distribution function 
-and the exponential distribution with rate $\lambda = 1$ is within the range of what could be expected under $H_0$.  
-Therefore, we do not reject the null hypothesis, and conclude that the sample 
+Because the p-value is relatively large ($0.1862$), the observed discrepancy between the empirical distribution function
+and the exponential distribution with rate $\lambda = 1$ is within the range of what could be expected under $H_0$.
+Therefore, we do not reject the null hypothesis, and conclude that the sample
 $\{|x_k|\}_{k=1}^{100}$ is consistent with an $\operatorname{Exp}(1)$ distribution.
 
 (c) $\{x_k\}_{k=1}^{100}$ and $\{y_l\}_{l=1}^{50}$ have the same distributions.
@@ -198,7 +198,7 @@ H_1: \{x_k\}_{k=1}^{100} \text{ and } \{y_l\}_{l=1}^{50} \text{ do not have the 
 
 \textbf{Test and justification.}
 To test $H_0$ versus $H_1$, we use the two-sample Kolmogorov--Smirnov test.
-This is a standard nonparametric procedure for comparing two independent samples 
+This is a standard nonparametric procedure for comparing two independent samples
 in order to determine whether they come from the same underlying distribution.
 The test is sensitive to differences in both the location and the shape of distributions.
 
@@ -207,7 +207,7 @@ Let
 \[
 D_{n,m} = \sup_x \bigl| F_n(x) - G_m(x) \bigr|
 \]
-be the Kolmogorov--Smirnov statistic, where $F_n$ and $G_m$ 
+be the Kolmogorov--Smirnov statistic, where $F_n$ and $G_m$
 are the empirical distribution functions of the samples $\{x_k\}$ and $\{y_l\}$.
 For a test of level $\alpha = 0.05$, the rejection region has the general form
 \[
@@ -224,29 +224,83 @@ D = 0.16, \quad p\text{-value} = 0.3503.
 Since $p\text{-value} = 0.3503 > \alpha = 0.05$, we do not reject $H_0$ at the 5\% significance level.
 
 \textbf{Conclusion in terms of the p-value.}
-Because the p-value is not small ($0.3503$), the observed difference between the empirical distribution functions 
-of $\{x_k\}$ and $\{y_l\}$ can be explained by random variation under $H_0$.  
+Because the p-value is not small ($0.3503$), the observed difference between the empirical distribution functions
+of $\{x_k\}$ and $\{y_l\}$ can be explained by random variation under $H_0$.
 Therefore, we do not reject the null hypothesis and conclude that the two samples
 $\{x_k\}_{k=1}^{100}$ and $\{y_l\}_{l=1}^{50}$ are consistent with being drawn from the same distribution.
 
 ### Problem 4:
 
-In this task you’ll practice fitting the regression line to some real-life features and analyzing the results.
-The file \texttt{data.csv} contains data on students, specifically their study time and corresponding marks.
-Your tasks are as follows:
+In this task you’ll practice fitting the regression line to some
+real-life features and analyzing the results. The file \texttt{data.csv}
+contains data on students, specifically their study time and
+corresponding marks. Your tasks are as follows:
 
-(a) Create a scatter plot of Marks vs. Study Time and provide brief comments;
+(a) Create a scatter plot of Marks vs. Study Time and provide brief
+    comments;
 
-(b) Fit a linear regression model using Marks as the dependent variable and Study Time as the independent variable.
-Explain shortly the process of deriving the regression equation;
+(b) Fit a linear regression model using Marks as the dependent variable
+    and Study Time as the independent variable. Explain shortly the
+    process of deriving the regression equation;
 
 (c) Evaluate the goodness-of-fit for the fitted line;
 
-(d) Suggest a way to test whether the Study Time is significant in predicting Marks. Find the corresponding test
-statistic, specify its distribution. Find the $p$-value of the test and make a conclusion;
+(d) Suggest a way to test whether the Study Time is significant in
+    predicting Marks. Find the corresponding test statistic, specify its
+    distribution. Find the $p$-value of the test and make a conclusion;
 
-(e) If Alice studies for approximately $8$ hours, what grade can we predict for her?
+(e) If Alice studies for approximately $8$ hours, what grade can we
+    predict for her?
 
-(f) Suggest up to three ideas to potentially improve prediction accuracy.
+(f) Suggest up to three ideas to potentially improve prediction
+    accuracy.
 
+#### a. Create a scatter plot of Marks vs. Study Time and provide brief comments;
 
+```{r}
+data <- read.csv("./data.csv")
+plot(data$time_study, data$Marks)
+```
+
+In this plot we observe the data, that seems to prove linear dependance
+between time study and marks.
+
+#### b. Fit a linear regression model using Marks as the dependent variable and Study Time as the independent variable. Explain shortly the process of deriving the regression equation;
+
+$Y(x) = ax + b$that is formula for linear regression model, where $a$
+and $b$ are parameters.
+
+We choose $a$ and $b$ to minimize $(y_i - ax_i - b)^2$, where $y_i$ is
+observed value
+
+```{r}
+regr.line <- lm(Marks ~ time_study, data=data)
+plot(data$time_study, data$Marks)
+abline(regr.line)
+```
+
+#### **c. Evaluate the goodness-of-fit for the fitted line;**<br> d. Suggest a way to test whether the study time is significant in predicting marks. Find the corresponding test statistics, specify its distribution. Find the p-value of the test and make a conclusion;
+
+goodness-of-fit is $R^2$ value.
+
+t-test is used to test whether the study time is significant in
+predicting marks. It uses t-statistics with approximately Student
+distribution
+
+```{r}
+summary(regr.line)
+```
+
+$$R^2 = 0.8878$$
+
+$p$-value = $2*10^{-16}$, which means that with $\alpha > p$-value we
+reject $H_0$(time study is not statistically significant in predicting
+marks)
+
+#### e. If Alice studies for approximately $8$ hours, what grade can we predict for her?
+
+```{r}
+Alice <- data.frame(time_study = 8)
+regr.line.Alice <- predict(regr.line, Alice)
+regr.line.Alice
+```
