@@ -304,3 +304,18 @@ Alice <- data.frame(time_study = 8)
 regr.line.Alice <- predict(regr.line, Alice)
 regr.line.Alice
 ```
+
+
+#### f. Suggest up to three ideas to potentially improve prediction accuracy.
+1. Get data about students' attendance, sleep hours and so on to better
+2. Normalize data
+```{r}
+data_norm <- data
+data_norm$time_study_norm <- scale(data_norm$time_study)
+data_norm$Marks_norm <- scale(data_norm$Marks)
+regr.line2 <- lm(Marks_norm ~ time_study_norm + I(time_study_norm^2), data=data_norm)
+plot(data_norm$time_study_norm, data_norm$Marks_norm)
+abline(regr.line2)
+summary(regr.line2)
+summary(regr.line)
+```
