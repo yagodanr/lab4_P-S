@@ -61,10 +61,173 @@ Using Kolmogorov--Smirnov test, check if
 
 (a) $\{x_k\}_{k=1}^{100}$ are normally distributed (with parameters calculated from the sample);
 
+```{r}
+n <- 23
+
+a_k <- function(k) {
+  (k*log(k^2*n+pi)) %% 1
+}
+
+ak.data <- sapply(1:150, a_k)
+x <- qnorm(ak.data[1:100])
+y <- qnorm(ak.data[101:150])
+
+mu_hat <- mean(x)
+sd_hat <- sd(x)
+
+mu_hat
+sd_hat
+```
+
+```{r}
+ks_res <- ks.test(x, "pnorm", mean = mu_hat, sd = sd_hat)
+ks_res
+```
+We consider the hypothesis
+\[
+H_0: \{x_k\}_{k=1}^{100} \text{ are observations from } \mathcal{N}(\mu,\sigma^2)
+\]
+with $(\mu,\sigma^2)$ estimated from the sample, against the general alternative
+\[
+H_1: \{x_k\}_{k=1}^{100} \text{ do not follow } \mathcal{N}(\mu,\sigma^2).
+\]
+
+\textbf{Test and justification.}
+To test $H_0$ vs.\ $H_1$ we use the one-sample Kolmogorov--Smirnov goodness-of-fit test.  
+This is a standard nonparametric test that compares the empirical distribution function $F_n(x)$ 
+of the sample with the theoretical distribution function $F(x;\hat\mu,\hat\sigma)$ of the fitted normal law.
+It is appropriate here because we want to check whether the whole distribution of the data agrees with a normal model,
+not just particular moments such as the mean or variance.
+
+\textbf{General form of the rejection region.}
+Let
+\[
+D_n = \sup_x \bigl| F_n(x) - F(x;\hat\mu,\hat\sigma) \bigr|
+\]
+be the Kolmogorov--Smirnov test statistic.  
+For a test of level $\alpha = 0.05$ the rejection region has the general form
+\[
+R_\alpha = \{ D_n > c_{0.05} \},
+\]
+where $c_{0.05}$ is the critical value (or, equivalently, we reject $H_0$ when the p-value is smaller than $\alpha$).
+
+\textbf{Numerical results and decision at } $\alpha = 0.05$.
+For our sample we obtain the parameter estimates
+\[
+\hat{\mu} = -0.001800432, \quad \hat{\sigma} = 1.034129,
+\]
+and the Kolmogorov--Smirnov statistic
+\[
+D = 0.045628, \quad p\text{-value} = 0.9853.
+\]
+Since $p\text{-value} = 0.9853 > \alpha = 0.05$, we do not reject $H_0$ at the 5\% significance level.
+
+\textbf{Conclusion in terms of the p-value.}
+Because the p-value is very large (0.9853), the observed discrepancy between the empirical distribution function 
+and the fitted normal distribution is well within what could reasonably be expected under $H_0$.  
+Therefore, we do not reject the null hypothesis, and we conclude that the sample 
+$\{x_k\}_{k=1}^{100}$ is consistent with a normal distribution with parameters estimated from the data.
+
+
 (b) $\{|x_k|\}_{k=1}^{100}$ are exponentially distributed with $\lambda = 1$;
+
+```{r}
+abs_x <- abs(x)
+
+ks_res <- ks.test(abs_x, "pexp", rate = 1)
+ks_res
+```
+We consider the hypothesis
+\[
+H_0: \{|x_k|\}_{k=1}^{100} \text{ are observations from the exponential distribution } \operatorname{Exp}(1),
+\]
+against the general alternative
+\[
+H_1: \{|x_k|\}_{k=1}^{100} \text{ do not follow } \operatorname{Exp}(1).
+\]
+
+\textbf{Test and justification.}
+To test $H_0$ vs.\ $H_1$ we use the one-sample Kolmogorov--Smirnov goodness-of-fit test.  
+This is a standard nonparametric test that compares the empirical distribution function $F_n(x)$ 
+of the sample $\{|x_k|\}$ with the theoretical distribution function $F(x)$ of the exponential law with rate $\lambda = 1$:
+\[
+F(x) = 1 - e^{-x}, \quad x \ge 0.
+\]
+The test is appropriate here because we want to check whether the entire distribution of the data agrees with the exponential model, 
+not just particular characteristics such as the mean.
+
+\textbf{General form of the rejection region.}
+Let
+\[
+D_n = \sup_x \bigl| F_n(x) - F(x) \bigr|
+\]
+be the Kolmogorov--Smirnov test statistic.  
+For a test of level $\alpha = 0.05$ the rejection region has the general form
+\[
+R_\alpha = \{ D_n > c_{0.05} \},
+\]
+where $c_{0.05}$ is the critical value corresponding to the Kolmogorov--Smirnov distribution (or, equivalently, we reject $H_0$ when the p-value is smaller than $\alpha$).
+
+\textbf{Numerical results and decision at } $\alpha = 0.05$.
+For our sample $\{|x_k|\}_{k=1}^{100}$ the Kolmogorov--Smirnov test yields the statistic
+\[
+D = 0.10893, \quad p\text{-value} = 0.1862.
+\]
+Since $p\text{-value} = 0.1862 > \alpha = 0.05$, we do not reject $H_0$ at the 5\% significance level.
+
+\textbf{Conclusion in terms of the p-value.}
+Because the p-value is relatively large ($0.1862$), the observed discrepancy between the empirical distribution function 
+and the exponential distribution with rate $\lambda = 1$ is within the range of what could be expected under $H_0$.  
+Therefore, we do not reject the null hypothesis, and conclude that the sample 
+$\{|x_k|\}_{k=1}^{100}$ is consistent with an $\operatorname{Exp}(1)$ distribution.
 
 (c) $\{x_k\}_{k=1}^{100}$ and $\{y_l\}_{l=1}^{50}$ have the same distributions.
 
+```{r}
+ks_x_y <- ks.test(x, y)
+ks_x_y
+```
+We consider the hypotheses
+\[
+H_0: \{x_k\}_{k=1}^{100} \text{ and } \{y_l\}_{l=1}^{50} \text{ are drawn from the same distribution},
+\]
+against
+\[
+H_1: \{x_k\}_{k=1}^{100} \text{ and } \{y_l\}_{l=1}^{50} \text{ do not have the same distribution}.
+\]
+
+\textbf{Test and justification.}
+To test $H_0$ versus $H_1$, we use the two-sample Kolmogorov--Smirnov test.
+This is a standard nonparametric procedure for comparing two independent samples 
+in order to determine whether they come from the same underlying distribution.
+The test is sensitive to differences in both the location and the shape of distributions.
+
+\textbf{General form of the rejection region.}
+Let
+\[
+D_{n,m} = \sup_x \bigl| F_n(x) - G_m(x) \bigr|
+\]
+be the Kolmogorov--Smirnov statistic, where $F_n$ and $G_m$ 
+are the empirical distribution functions of the samples $\{x_k\}$ and $\{y_l\}$.
+For a test of level $\alpha = 0.05$, the rejection region has the general form
+\[
+R_\alpha = \{ D_{n,m} > c_{0.05} \},
+\]
+where $c_{0.05}$ is the critical value corresponding to the two-sample Kolmogorov--Smirnov distribution
+(or, equivalently, $H_0$ is rejected when the p-value is smaller than $\alpha$).
+
+\textbf{Numerical results and decision at } $\alpha = 0.05$.
+For the two-sample Kolmogorov--Smirnov test, we obtain
+\[
+D = 0.16, \quad p\text{-value} = 0.3503.
+\]
+Since $p\text{-value} = 0.3503 > \alpha = 0.05$, we do not reject $H_0$ at the 5\% significance level.
+
+\textbf{Conclusion in terms of the p-value.}
+Because the p-value is not small ($0.3503$), the observed difference between the empirical distribution functions 
+of $\{x_k\}$ and $\{y_l\}$ can be explained by random variation under $H_0$.  
+Therefore, we do not reject the null hypothesis and conclude that the two samples
+$\{x_k\}_{k=1}^{100}$ and $\{y_l\}_{l=1}^{50}$ are consistent with being drawn from the same distribution.
 
 ### Problem 4:
 
@@ -86,7 +249,4 @@ statistic, specify its distribution. Find the $p$-value of the test and make a c
 
 (f) Suggest up to three ideas to potentially improve prediction accuracy.
 
-```{r}
-plot(cars)
-```
 
