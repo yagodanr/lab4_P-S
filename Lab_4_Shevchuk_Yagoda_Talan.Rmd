@@ -49,11 +49,59 @@ $$
 H_0 : \mu_1 = \mu_2 \quad \text{vs.} \quad H_1 : \mu_1 \neq \mu_2; \quad \sigma_1^2 = \sigma_2^2 = 1.
 $$
 
+**Explanation:** Since the population variances are known
+($\sigma^2 = 1$), we use the **Two-sample Z-test**. For $\alpha=0.05$,
+the rejection region is $|Z| > 1.96$.
+
+```{r}
+n <- 73
+a_k <- function(k) {
+  (k * log(k^2 * n + pi)) %% 1
+}
+
+ak.data <- sapply(1:150, a_k)
+x <- qnorm(ak.data[1:100])
+y <- qnorm(ak.data[101:150])
+
+sigma_sq <- 1
+nx <- length(x)
+ny <- length(y)
+se <- sqrt((sigma_sq/nx) + (sigma_sq/ny))
+z_stat <- (mean(x) - mean(y)) / se
+p_val_z <- 2 * (1 - pnorm(abs(z_stat)))
+
+cat("Z-statistic:", z_stat, "\n")
+cat("P-value:", p_val_z, "\n")
+
+if(p_val_z < 0.05) {
+  cat("Conclusion: Reject H0 (Means are different).")
+} else {
+  cat("Conclusion: Do not reject H0 (Means are effectively equal).")
+}
+```
+
 ### Problem 2:
 
 $$
 H_0 : \sigma_1^2 = \sigma_2^2 \quad \text{vs.} \quad H_1 : \sigma_1^2 > \sigma_2^2; \quad \mu_1 \text{ and } \mu_2 \text{ are unknown.}
 $$
+
+**Explanation:** We use **Fisher's F-test** to compare variances. The
+alternative hypothesis is one-sided ($H_1: \sigma_1^2 > \sigma_2^2$), so
+we look for $F > F_{crit}$ (right-tailed test).
+
+```{r}
+res_f <- var.test(x, y, ratio = 1, alternative = "greater", conf.level = 0.95)
+res_f
+
+if(res_f$p.value < 0.05) {
+  cat("Conclusion: Reject H0 (Variance of X is significantly greater).")
+} else {
+  cat("Conclusion: Do not reject H0 (Variances are not significantly different).")
+}
+```
+
+
 
 ### Problem 3:
 
@@ -318,4 +366,5 @@ plot(data_norm$time_study_norm, data_norm$Marks_norm)
 abline(regr.line2)
 summary(regr.line2)
 summary(regr.line)
+
 ```
